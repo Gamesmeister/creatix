@@ -21,9 +21,9 @@ export class IdeaService {
     }
     /* Returns a collection of all ideas */
 
-    public getIdeas(): Promise<IIdeaListItem[]> {
+    public getIdeas(sortOrder?: string): Promise<IIdeaListItem[]> {
         let promise: Promise<IIdeaListItem[]> = new Promise<IIdeaListItem[]>((resolve, reject) => {
-            let query: string = `${this.siteAbsoluteUrl}${LIST_API_ENDPOINT}/items?${SELECT_QUERY}`;
+            let query: string = `${this.siteAbsoluteUrl}${LIST_API_ENDPOINT}/items?${SELECT_QUERY}&${sortOrder}`;
             this.client.get(
                 query,
                 SPHttpClient.configurations.v1,

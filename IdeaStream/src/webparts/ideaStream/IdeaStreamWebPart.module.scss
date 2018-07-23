@@ -1,45 +1,30 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
-a {
-  color: $ms-color-themePrimary;
-}
-a :visited {
-  color: $ms-color-themePrimary;
-}
-
-.sortBar {
-  width:100%;
-  padding-bottom: 8px;
-  border-bottom: solid 1px #eee;
-  margin-bottom:16px;
-}
-.activeSort{
-  border-bottom: solid 1px;
-  border-color: $ms-color-themePrimary;
-  padding-bottom:8px;
-}
-ul {
-  list-style: none;
-  padding:0px 0px 0px 20px;
-  margin: 0px;
-}
-a {
-  text-decoration: none;
-}
-
-li {
-  display: inline;
-  list-style-type: none;
-  margin-right:16px;
-}
 .IdeaStream {
+  .sortBar {
+    width:100%;
+    padding-bottom: 8px;
+    border-bottom: solid 1px #eee;
+    margin-bottom:16px;
+  }
+  .activeSort{
+    border-bottom: solid 1px;
+    padding-bottom:8px;
+  }
   a {
-    color: $ms-color-themePrimary;
+    text-decoration: none;
   }
-  a :visited {
-    color: $ms-color-themePrimary;
+  ul {
+    list-style: none;
+    padding:0px 0px 0px 20px;
+    margin: 0px;
   }
-.contentLeft {
+  li {
+    display: inline;
+    list-style-type: none;
+    margin-right:16px;
+  }
+ .contentLeft {
     float:left;
   }
   .item {

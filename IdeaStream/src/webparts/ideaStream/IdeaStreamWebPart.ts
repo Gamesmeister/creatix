@@ -36,29 +36,38 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
 
   public render(): void {
     this.domElement.innerHTML = `
-      <div class="${styles.sortBar}">
-        <ul>
-          <li class="${styles.activeSort}">
-            <a href>Latest</a>
-          </li>
-          <li>
-            <a href>Commented</a>
-          </li>
-        </ul>
-      </div>
       <div class="${ styles.IdeaStream }">
+        <div class="${styles.sortBar}">
+          <ul>
+            <li class="${styles.activeSort}">
+              <a id="sortLatest" href>Latest</a>
+            </li>
+            <li>
+              <a id="sortCommented" href="#">Commented</a>
+            </li>
+          </ul>
+        </div>
         <div class="${ styles.container }">
           <div id="ideaStream"><div>
         </div>
       </div>`;
 
+    this._setSortLinks();
       this._ideaStreamElement = document.getElementById("ideaStream");
 
       this._getIdeas();
   }
 
-  private _getIdeas(): void {
-    this.ideaService.getIdeas()
+  private _setSortLinks(): void {
+    document.getElementById("sortCommented")
+      .addEventListener('click', () => {
+        this._rendered = false;
+        this._getIdeas("$orderby=Comments desc")
+      })
+  }
+
+  private _getIdeas(sortOrder?: string): void {
+    this.ideaService.getIdeas(sortOrder)
       .then((ideas: IIdeaListItem[]) => {
         this._renderIdeas(this._ideaStreamElement, ideas);
       });
@@ -80,6 +89,7 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
 }
 
   private _renderIdeas(element: HTMLElement, ideas: IIdeaListItem[]): void {
+    element.innerHTML = '';
     if (! this._rendered){
       let ideaStream: string = "";
       if (ideas && ideas.length && ideas.length > 0){

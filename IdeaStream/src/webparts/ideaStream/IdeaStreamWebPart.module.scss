@@ -7,10 +7,13 @@
     border-bottom: solid 1px #eee;
     margin-bottom:16px;
   }
-  .activeSort{
-    border-bottom: solid 1px;
-    padding-bottom:8px;
+  :global{
+    .activeSort{
+      border-bottom: solid 1px;
+      padding-bottom:8px;
+    }
   }
+  
   a {
     text-decoration: none;
   }

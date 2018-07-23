@@ -60,20 +60,28 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
     let ul: HTMLElement = document.createElement("ul");
     sortBar.appendChild(ul);
     options.forEach((option: IIdeaSortOption) => {
-      let sortListItem: HTMLElement = document.createElement("li");
-      let sortListLink: HTMLElement = document.createElement("a");
-      sortListLink.setAttribute("href", "#");
-      sortListLink.innerHTML = option.title;
-      sortListLink.addEventListener('click', () => {
-        this._rendered = false;
-        this._getIdeas(option.queryString);
-      });
-      sortListLink.setAttribute("class", "activeSort");
-
-      sortListItem.appendChild(sortListLink);
-      ul.appendChild(sortListItem);
+      this._createSortOption(option, ul);
     }); 
   }
+
+  private _createSortOption(option: IIdeaSortOption, ulist: HTMLElement){
+    let sortListItem: HTMLElement = document.createElement("li");
+    let sortListLink: HTMLElement = document.createElement("a");
+    sortListLink.setAttribute("href", "#");
+    sortListLink.innerHTML = option.title;
+    sortListLink.addEventListener('click', () => {
+      this._rendered = false;
+      this._getIdeas(option.queryString);
+      let links = [].slice.call(ulist.children);
+      links.forEach((link: HTMLLIElement) => {
+        link.setAttribute("class", "");
+      });
+      sortListItem.setAttribute("class", "activeSort");
+    });
+
+    sortListItem.appendChild(sortListLink);
+    ulist.appendChild(sortListItem);
+}
 
   private _getIdeas(sortOrder?: string): void {
     this.ideaService.getIdeas(sortOrder)

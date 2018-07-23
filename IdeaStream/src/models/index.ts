@@ -1,2 +1,2 @@
 export * from "./IIdeaListItem";
-export * from "./IIdeaStreamSort";
+export * from "./IIdeaSortOption";

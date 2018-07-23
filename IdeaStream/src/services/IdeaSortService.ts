@@ -1,8 +1,8 @@
-import { IIdeaStreamSort } from "../models";
+import { IIdeaSortOption } from "../models";
 
 export class IdeaSortService {
-    public getSortLinks(): IIdeaStreamSort[] {
-        let sortLinks: IIdeaStreamSort[] = [
+    public getSortLinks(): IIdeaSortOption[] {
+        let sortLinks: IIdeaSortOption[] = [
             {
                 title: "Latest",
                 order: 1,

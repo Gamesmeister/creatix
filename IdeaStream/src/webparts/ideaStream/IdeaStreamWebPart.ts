@@ -12,6 +12,8 @@ import * as strings from 'IdeaStreamWebPartStrings';
 import { IIdeaListItem } from "../../models";
 import { IdeaService } from "../../services";
 import * as moment from "moment";
+import { IIdeaSortOption } from '../../../lib/models';
+import { IdeaSortService } from '../../services/IdeaSortService';
 
 export interface IIdeaStreamWebPartProps {
   description: string;
@@ -23,6 +25,7 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
   private _rendered : boolean = false;
 
   private ideaService: IdeaService;
+  private _ideaSortService : IdeaSortService;
 
   protected onInit(): Promise<void> {
     
@@ -30,6 +33,7 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
       this.context.pageContext.web.absoluteUrl, 
       this.context.spHttpClient
     );
+    this._ideaSortService = new IdeaSortService();
 
     return Promise.resolve(); 
   }
@@ -37,33 +41,38 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
   public render(): void {
     this.domElement.innerHTML = `
       <div class="${ styles.IdeaStream }">
-        <div class="${styles.sortBar}">
-          <ul>
-            <li class="${styles.activeSort}">
-              <a id="sortLatest" href>Latest</a>
-            </li>
-            <li>
-              <a id="sortCommented" href="#">Commented</a>
-            </li>
-          </ul>
+        <div id="sortBar" class="${styles.sortBar}">
         </div>
         <div class="${ styles.container }">
           <div id="ideaStream"><div>
         </div>
       </div>`;
 
-    this._setSortLinks();
-      this._ideaStreamElement = document.getElementById("ideaStream");
+    let sortOptions: IIdeaSortOption[] = this._ideaSortService.getSortLinks();
+    this._setSortLinks(sortOptions);
+    this._ideaStreamElement = document.getElementById("ideaStream");
 
-      this._getIdeas();
+    this._getIdeas();
   }
 
-  private _setSortLinks(): void {
-    document.getElementById("sortCommented")
-      .addEventListener('click', () => {
+  private _setSortLinks(options: IIdeaSortOption[]): void {
+    let sortBar: HTMLElement = document.getElementById("sortBar");
+    let ul: HTMLElement = document.createElement("ul");
+    sortBar.appendChild(ul);
+    options.forEach((option: IIdeaSortOption) => {
+      let sortListItem: HTMLElement = document.createElement("li");
+      let sortListLink: HTMLElement = document.createElement("a");
+      sortListLink.setAttribute("href", "#");
+      sortListLink.innerHTML = option.title;
+      sortListLink.addEventListener('click', () => {
         this._rendered = false;
-        this._getIdeas("$orderby=Comments desc")
-      })
+        this._getIdeas(option.queryString);
+      });
+      sortListLink.setAttribute("class", "activeSort");
+
+      sortListItem.appendChild(sortListLink);
+      ul.appendChild(sortListItem);
+    }); 
   }
 
   private _getIdeas(sortOrder?: string): void {

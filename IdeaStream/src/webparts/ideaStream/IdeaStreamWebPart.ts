@@ -70,7 +70,6 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
     sortListLink.setAttribute("href", "#");
     sortListLink.innerHTML = option.title;
     sortListLink.addEventListener('click', () => {
-      this._rendered = false;
       this._getIdeas(option.queryString);
       let links = [].slice.call(ulist.children);
       links.forEach((link: HTMLLIElement) => {
@@ -84,6 +83,7 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
 }
 
   private _getIdeas(sortOrder?: string): void {
+    this._rendered = false;
     this.ideaService.getIdeas(sortOrder)
       .then((ideas: IIdeaListItem[]) => {
         this._renderIdeas(this._ideaStreamElement, ideas);

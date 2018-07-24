@@ -48,18 +48,18 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
         </div>
       </div>`;
 
-    let sortOptions: IIdeaSortOption[] = this._ideaSortService.getSortLinks();
-    this._setSortLinks(sortOptions);
+    this._setSortLinks();
     this._ideaStreamElement = document.getElementById("ideaStream");
 
     this._getIdeas();
   }
 
-  private _setSortLinks(options: IIdeaSortOption[]): void {
+  private _setSortLinks(): void {
+    let sortOptions: IIdeaSortOption[] = this._ideaSortService.getSortLinks();
     let sortBar: HTMLElement = document.getElementById("sortBar");
     let ul: HTMLElement = document.createElement("ul");
     sortBar.appendChild(ul);
-    options.forEach((option: IIdeaSortOption) => {
+    sortOptions.forEach((option: IIdeaSortOption) => {
       this._createSortOption(option, ul);
     }); 
   }

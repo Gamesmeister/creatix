@@ -2,24 +2,25 @@
 
 .IdeaStream {
   .sortBar {
-    width:100%;
+    max-width:100%;
     padding-bottom: 8px;
     border-bottom: solid 1px #eee;
-    margin-bottom:16px;
-  }
+    margin: 0 auto;
+    margin-bottom:20px;
+    
   :global{
     .activeSort{
       border-bottom: solid 1px;
       padding-bottom:8px;
     }
   }
-  
+
   a {
     text-decoration: none;
   }
   ul {
     list-style: none;
-    padding:0px 0px 0px 20px;
+    padding:0px 0px 0px 0px;
     margin: 0px;
   }
   li {
@@ -27,7 +28,8 @@
     list-style-type: none;
     margin-right:16px;
   }
- .contentLeft {
+}
+.contentLeft {
     float:left;
   }
   .item {

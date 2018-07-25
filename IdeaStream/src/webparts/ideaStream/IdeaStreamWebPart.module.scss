@@ -1,22 +1,25 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
 .IdeaStream {
+
+  a {
+    text-decoration: none;
+    color: "[theme: Link, default: #0078d7]";
+  }
   .sortBar {
-    max-width:100%;
+    max-width:700px;
     padding-bottom: 8px;
-    border-bottom: solid 1px #eee;
+    border-bottom: solid 1px;
+    border-bottom-color: $ms-color-neutralLight;
     margin: 0 auto;
     margin-bottom:20px;
     
   :global{
     .activeSort{
       border-bottom: solid 1px;
+      border-color: "[theme: Link, default: #0078d7]";
       padding-bottom:8px;
     }
-  }
-
-  a {
-    text-decoration: none;
   }
   ul {
     list-style: none;

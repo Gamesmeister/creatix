@@ -41,10 +41,16 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
   public render(): void {
     this.domElement.innerHTML = `
       <div class="${ styles.IdeaStream }">
-        <div id="sortBar" class="${styles.sortBar}">
+        <div class="${styles.contentLeft}">
+          <div id="sortBar" class="${styles.sortBar}">
+          </div>
+          <div class="${ styles.container }">
+            <div id="ideaStream"></div>
+          </div>
         </div>
-        <div class="${ styles.container }">
-          <div id="ideaStream"><div>
+
+        <div class="${styles.contentRight}">
+          <h4>Filter ideas</h4>
         </div>
       </div>`;
 
@@ -151,7 +157,7 @@ export default class IdeaStreamWebPart extends BaseClientSideWebPart<IIdeaStream
       }
 
       element.innerHTML = `
-        <div class=${styles.contentLeft}>
+        <div>
           ${ideaStream}
         </div>
       `;

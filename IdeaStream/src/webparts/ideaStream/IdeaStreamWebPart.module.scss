@@ -2,38 +2,54 @@
 
 .IdeaStream {
 
+  max-width: 960px;
+  margin: 0 auto;
+
   a {
     text-decoration: none;
     color: "[theme: Link, default: #0078d7]";
   }
+  h4{
+    @include ms-font-xl;
+    padding-bottom: 4px;
+    margin-bottom: 16px;
+    border-bottom: solid 1px #eaeaea;
+    -webkit-margin-before: 0px;
+  }
   .sortBar {
-    max-width:700px;
-    padding-bottom: 8px;
+    padding: 8px 0px 5px;
     border-bottom: solid 1px;
     border-bottom-color: $ms-color-neutralLight;
     margin: 0 auto;
     margin-bottom:20px;
     
-  :global{
-    .activeSort{
-      border-bottom: solid 1px;
-      border-color: "[theme: Link, default: #0078d7]";
-      padding-bottom:8px;
+    :global{
+      .activeSort{
+        border-bottom: solid 1px;
+        border-color: "[theme: Link, default: #0078d7]";
+        padding-bottom:8px;
+      }
+    }
+    ul {
+      list-style: none;
+      padding:0px 0px 0px 0px;
+      margin: 0px;
+    }
+    li {
+      display: inline;
+      list-style-type: none;
+      margin-right:16px;
     }
   }
-  ul {
-    list-style: none;
-    padding:0px 0px 0px 0px;
-    margin: 0px;
-  }
-  li {
-    display: inline;
-    list-style-type: none;
-    margin-right:16px;
-  }
-}
-.contentLeft {
+  .contentLeft {
     float:left;
+    width: 700px;
+    display:none;
+  }
+  .contentRight {
+    float:left;
+    width: 165px;
+    margin-left:35px;
   }
   .item {
     margin-bottom:32px;
